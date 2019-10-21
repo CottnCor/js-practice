@@ -2,5 +2,3 @@
 
 const reverse = ([h, ...t]) => h ? reverse(t) + h : '';
 console.log([...reverse('🏠🐷😊😢')]);
-
-
