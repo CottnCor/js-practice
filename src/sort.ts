@@ -24,7 +24,7 @@ interface ISwap<T> {
  *
  */
 interface ISort<T> {
-  (array: Array<T>, compareFn?: ICompare<T>): void
+  (array: Array<T>, compareFn?: ICompare<T>): Array<T>
 }
 
 /**
@@ -63,6 +63,7 @@ const bubbleSort: ISort<any> = <T>(
       }
     }
   }
+  return array
 }
 
 /**
@@ -87,6 +88,7 @@ const selectionSort: ISort<any> = <T>(
       swap(array, i, indexMin)
     }
   }
+  return array
 }
 
 /**
@@ -109,6 +111,7 @@ const insertionSort: ISort<any> = <T>(
     }
     array[j] = temp
   }
+  return array
 }
 
 /**
@@ -119,7 +122,34 @@ const insertionSort: ISort<any> = <T>(
 const mergeSort: ISort<any> = <T>(
   array: Array<T>,
   compareFn: ICompare<T> = defaultCompare
-) => {}
+) => {
+  const { length } = array
+  if (length > 1) {
+    const middle = Math.floor(length / 2)
+    const left = mergeSort(array.slice(0, middle), compareFn)
+    const right = mergeSort(array.slice(middle, length), compareFn)
+    array = merge(left, right, compareFn)
+  }
+  return array
+}
+
+const merge = <T>(
+  left: Array<T>,
+  right: Array<T>,
+  compareFn: ICompare<T>
+): Array<T> => {
+  let i = 0
+  let j = 0
+  const result = new Array()
+  while (i < left.length && j < right.length) {
+    result.push(
+      compareFn(left[i], right[j]) === Compare.LESS_THAN
+        ? left[i++]
+        : right[j++]
+    )
+  }
+  return result.concat(i < left.length ? left.slice(i) : right.slice(j))
+}
 
 /**
  *
@@ -129,7 +159,42 @@ const mergeSort: ISort<any> = <T>(
 const quickSort: ISort<any> = <T>(
   array: Array<T>,
   compareFn: ICompare<T> = defaultCompare
-) => {}
+) => {
+  return quick(array, 0, array.length - 1, compareFn)
+}
+
+const quick = <T>(
+  array: Array<T>,
+  left: number,
+  right: number,
+  compareFn: ICompare<T>
+) => {
+  if (array.length > 1) {
+    let index = partition(array, left, right, compareFn)
+    if (left < index - 1) quick(array, left, index - 1, compareFn)
+    if (index < right) quick(array, index, right, compareFn)
+  }
+  return array
+}
+
+const partition = <T>(
+  array: Array<T>,
+  left: number,
+  right: number,
+  compareFn: ICompare<T>
+): number => {
+  let i = left
+  let j = right
+  let pivot = array[Math.floor((left + right) / 2)]
+  while (i <= j) {
+    while (compareFn(array[i], pivot) === Compare.LESS_THAN) i++
+    while (compareFn(array[j], pivot) === Compare.BIGGER_THAN) j--
+    if (i <= j) {
+      swap(array, i++, j--)
+    }
+  }
+  return i
+}
 
 /**
  *
@@ -139,4 +204,6 @@ const quickSort: ISort<any> = <T>(
 const bucketSort: ISort<any> = <T>(
   array: Array<T>,
   compareFn: ICompare<T> = defaultCompare
-) => {}
+) => {
+  return array
+}

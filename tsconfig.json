@@ -1,0 +1,11 @@
+{
+  "files": [
+    "src/sort.ts"
+  ],
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "sourceMap": true,
+    "target": "es2015"
+  }
+}
