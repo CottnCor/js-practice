@@ -33,7 +33,7 @@ interface ISort<T> {
  * @param b
  */
 const defaultCompare: ICompare<any> = <T>(a: T, b: T) => {
-  return a < b ? Compare.LESS_THAN : Compare.BIGGER_THAN
+  return a <= b ? Compare.LESS_THAN : Compare.BIGGER_THAN
 }
 
 /**
@@ -170,30 +170,34 @@ const quick = <T>(
   compareFn: ICompare<T>
 ) => {
   if (array.length > 1) {
-    let index = partition(array, left, right, compareFn)
-    if (left < index - 1) quick(array, left, index - 1, compareFn)
-    if (index < right) quick(array, index, right, compareFn)
-  }
-  return array
-}
-
-const partition = <T>(
-  array: Array<T>,
-  left: number,
-  right: number,
-  compareFn: ICompare<T>
-): number => {
-  let i = left
-  let j = right
-  let pivot = array[Math.floor((left + right) / 2)]
-  while (i <= j) {
-    while (compareFn(array[i], pivot) === Compare.LESS_THAN) i++
-    while (compareFn(array[j], pivot) === Compare.BIGGER_THAN) j--
-    if (i <= j) {
-      swap(array, i++, j--)
+    if (left < right) {
+      let i = left
+      let j = right
+      let middle = Math.floor((i + j) / 2)
+      let pivot = array[middle]
+      swap(array, i, middle)
+      while (left < right) {
+        while (
+          compareFn(array[right], pivot) === Compare.BIGGER_THAN &&
+          left < right
+        ) {
+          right--
+        }
+        if (left < right) array[left++] = array[right]
+        while (
+          compareFn(array[left], pivot) === Compare.LESS_THAN &&
+          left < right
+        ) {
+          left++
+        }
+        if (left < right) array[right--] = array[left]
+      }
+      array[left] = pivot
+      quick(array, i, left - 1, compareFn)
+      quick(array, left + 1, j, compareFn)
     }
+    return array
   }
-  return i
 }
 
 /**
