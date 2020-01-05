@@ -6,6 +6,7 @@
     "gulp-babel": "^8.0.0",
     "gulp-clean": "^0.4.0",
     "gulp-typescript": "^5.0.1",
+    "jshint": "^2.11.0-rc1",
     "ts-node": "^8.4.1",
     "typescript": "^3.6.4"
   }
