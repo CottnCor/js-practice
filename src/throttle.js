@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 const throttle = (fn, delay = 500) => {
   let canRun = true;
   return function () {

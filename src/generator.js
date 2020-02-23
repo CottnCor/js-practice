@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 function* foo(x) {
   var y = 2 * (yield (x + 1));
   var z = yield (y / 3);
@@ -23,13 +25,13 @@ function* dataConsumer() {
 }
 
 let genObj = dataConsumer();
+
 genObj.next();
 // Started
 genObj.next('a')
 // 1. a
 genObj.next('b')
 // 2. b
-
 
 function* firstinput () {
   console.log(`First`);

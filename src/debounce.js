@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 const debounce =  (callback, delay = 500) => {
   let timer = Object.create(null);
   return function () {

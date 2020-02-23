@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 let x = 1;
 const obj = {
   x: 2,

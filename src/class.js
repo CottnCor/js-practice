@@ -1,26 +1,75 @@
-/*jshint esversion: 6 */
+/*jshint esversion: 9 */
 
-const Fruit = class {
-  constructor(name){
-    this.name = name;
-    this.age = 0;
+/**
+ * define step 1.
+ */
+function Animal(name) {
+  this.name = name;
+}
+
+Object.assign(Animal.prototype, {
+  say() {
+    console.log(`my name is ${this.name}.`);
   }
-  get Name() {
-    console.log("i'm name");
-    return this.name;
+});
+
+console.log('define step 1.');
+
+const dog = new Animal('wangwang');
+dog.say();
+
+//////////////////////////////////////////////
+
+/**
+ * define step 2.
+ */
+class Factory {
+  constructor(product) {
+    this.product = product;
+  }
+  make() {
+    console.log(`my product is ${this.product}.`);
   }
 }
 
-const CreateFruitFactory = (...param) => class JuicyFruit extends Fruit {
-  constructor(){
-    super(...param);
+// class 本身是一个 function，并且本身就指向 构造函数，只是构造函数的另一种写法。
+console.log(Factory === Factory.prototype.constructor);
+
+// 根据上面的思路，class 的方法当然都是定义在 prototype 属性上面。
+Object.assign(Factory.prototype, {
+  close() {
+    console.log(`closed !!!`);
   }
+});
+
+console.log('define step 2.');
+
+const toyFactory = new Factory('toy');
+toyFactory.make();
+toyFactory.close();
+
+//////////////////////////////////////////////
+
+/**
+ * handwriting 「new」
+ * @param {构造函数} custructor
+ * @param {构造函数参数} params
+ */
+function _new() {
+  const args = [].slice.apply(arguments);
+  const constructor = args.shift();
+  const context = Object.create(constructor.prototype);
+  const result = constructor.apply(context, args);
+  return typeof result === 'object' && result != null ? result : context;
 }
 
-export default CreateFruitFactory;
+console.log('handwriting 「new」');
 
-class Plum extends CreateFruitFactory('Plum', 30){}
+const bird = _new(Animal, 'jiujiu');
+bird.say();
 
-const plum = new Plum();
+//////////////////////////////////////////////
 
-console.log(plum.Name);
+/**
+ * define extends 1.
+ */

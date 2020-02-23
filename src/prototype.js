@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 function Foo() {
   Foo.a = function() {
       console.log(1)
