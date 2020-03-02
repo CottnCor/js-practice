@@ -73,3 +73,16 @@ bird.say();
 /**
  * define extends 1.
  */
+
+function _new() {
+  const args = Array.from(argument);
+  const constructor = args.shift();
+  if (typeof constructor !== 'function') {
+    throw 'first param must be a constructor funciton';
+  }
+  _new.target = constructor;
+  const newObj = Object.create(constructor.prototype);
+  const result = constructor.apply(newObj, args);
+  const isObject = typeof result === 'object' && result !== null;
+  return isObject ? result : newObj;
+}
