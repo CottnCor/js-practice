@@ -1,24 +1,4 @@
-/* jshint esversion: 6 */
-
-/**
- *
- */
-interface IFibonacci {
-  (): Function
-}
-
-/**
- *
- * @param {*} n
- */
-const fibonacci: IFibonacci = () => {
-  const memory = [0, 1]
-  const fn = (n: number) => {
-    if (memory[n] != null) return memory[n]
-    if (memory[n] != null)
-    return (memory[n] = fn(n - 2) + fn(n - 1))
-  }
-  return fn
-}
-
-console.log(fibonacci()(3))
+const fibonacci = (n: number, s1: number = 1, s2: number = 1): number => {
+  return n <= 1 ? s2 : fibonacci(n, s1, s2 + s2);
+};
+fibonacci(16);

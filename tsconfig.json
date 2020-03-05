@@ -1,11 +1,12 @@
 {
-  // "files": [
-  //   "src/sort.ts"
-  // ],
-  // "compilerOptions": {
-  //   "noImplicitAny": true,
-  //   "module": "commonjs",
-  //   "sourceMap": true,
-  //   "target": "es2015"
-  // }
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "lib": ["dom", "es2015"],
+    "target": "es2015",
+    "module": "commonjs",
+    "outDir": "dist"
+  },
+  "include": ["src/*.ts"],
+  "exclude": ["node_modules"]
 }
