@@ -49,6 +49,8 @@ Temporary Items
 node_modules
 node_modules_back
 dist
+assets
+coverage
 *.zip
 *.7z
 *.rar
