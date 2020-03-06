@@ -13,14 +13,8 @@
       "sourceMaps": true,
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
-      "args": [
-        "${relativeFile}"
-      ],
-      "runtimeArgs": [
-        "--nolazy",
-        "-r",
-        "ts-node/register"
-      ]
+      "args": ["${relativeFile}"],
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register"]
     },
     {
       "name": "Debugger Current JS",
@@ -33,6 +27,19 @@
       "internalConsoleOptions": "neverOpen",
       "program": "${workspaceFolder}/${relativeFile}",
       "args": []
+    },
+    {
+      "name": "Jest Current File",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/.bin/jest",
+      "args": ["${fileBasenameNoExtension}", "--config", "jest.config.js"],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "disableOptimisticBPs": true,
+      "windows": {
+        "program": "${workspaceFolder}/node_modules/jest/bin/jest"
+      }
     }
   ]
 }

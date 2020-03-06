@@ -45,7 +45,7 @@ function resolvePromise(promise2, x, resolve, reject) {
   }
 }
 
-class Promise {
+class _Promise {
   constructor(executor) {
     this.state = 'pending';
     this.value = undefined;
@@ -82,7 +82,7 @@ class Promise {
         : err => {
             throw err;
           };
-    let promise2 = new Promise((resolve, reject) => {
+    let promise2 = new _Promise((resolve, reject) => {
       if (this.state === 'fulfilled') {
         // 异步
         setTimeout(() => {
@@ -136,12 +136,12 @@ class Promise {
   }
 }
 
-Promise.defer = Promise.deferred = function() {
+_Promise.defer = _Promise.deferred = function() {
   let dfd = {};
-  dfd.promise = new Promise((resolve, reject) => {
+  dfd.promise = new _Promise((resolve, reject) => {
     dfd.resolve = resolve;
     dfd.reject = reject;
   });
   return dfd;
 };
-module.exports = Promise;
+module.exports = _Promise;
