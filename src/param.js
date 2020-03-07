@@ -1,10 +1,10 @@
-/*jshint esversion: 6 */
+/* jshint esversion: 6 */
 
 function changeObjProperty(o) {
-  o.siteUrl = "http://www.baidu.com";
-  o = new Object();
-  o.siteUrl = "http://www.google.com";
+    o.siteUrl = 'http://www.baidu.com';
+    o = Object.create({});
+    o.siteUrl = 'http://www.google.com';
 }
-let webSite = new Object();
+let webSite = Object.create({});
 changeObjProperty(webSite);
 console.log(webSite.siteUrl);

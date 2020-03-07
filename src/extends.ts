@@ -1,23 +1,23 @@
 class Animal {
-  move(distanceInMeters: number = 0) {
-    console.log(`Animal moved ${distanceInMeters}m.`);
-  }
-  static say(content: string = '') {
-    console.log(`Animal sayed ${content}.`);
-  }
+    public static say(content = '') {
+        console.log(`Animal sayed ${content}.`);
+    }
+    public move(distanceInMeters = 0) {
+        console.log(`Animal moved ${distanceInMeters}m.`);
+    }
 }
 
 class Dog extends Animal {
-  bark() {
-    console.log('Woof! Woof!');
-  }
-  say(content: string = '') {
-    console.log(`Dog sayed ${content}.`);
-  }
+    public bark() {
+        console.log('Woof! Woof!');
+    }
+    public say(content = '') {
+        console.log(`Dog sayed ${content}.`);
+    }
 }
 
 const dog = new Dog();
-dog?.bark();
+dog.bark();
 dog.move(10);
 dog.bark();
-dog.say("wangwang");
+dog.say('wangwang');

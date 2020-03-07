@@ -1,9 +1,8 @@
-var findRepeatNumber = function(nums: number[]) {};
+const findRepeatNumber = function(nums: number[]) {};
 
-var findRepeat = function() {
-  let nums = [32, 64];
-  this.findRepeatNumber(nums);
+const findRepeat = function() {
+    let nums = [32, 64];
+    findRepeatNumber(nums);
 };
 
-this.findRepeat();
-
+findRepeat();

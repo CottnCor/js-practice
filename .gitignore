@@ -54,3 +54,5 @@ coverage
 *.zip
 *.7z
 *.rar
+
+test-report.html

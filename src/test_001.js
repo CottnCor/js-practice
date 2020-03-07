@@ -13,24 +13,22 @@
  */
 
 function start(id) {
-  this.promises = !this.promises
-    ? execute(id)
-    : this.promises.then(() => execute(id));
+    this.promises = !this.promises ? execute(id) : this.promises.then(() => execute(id));
 }
 
 // 测试代码 (请勿更改):
 
 for (let i = 0; i < 5; i++) {
-  start(i);
+    start(i);
 }
 
 function sleep() {
-  const duration = Math.floor(Math.random() * 500);
-  return new Promise(resolve => setTimeout(resolve, duration));
+    const duration = Math.floor(Math.random() * 500);
+    return new Promise((resolve) => setTimeout(resolve, duration));
 }
 
 function execute(id) {
-  return sleep().then(() => {
-    console.log("id", id);
-  });
+    return sleep().then(() => {
+        console.log('id', id);
+    });
 }
