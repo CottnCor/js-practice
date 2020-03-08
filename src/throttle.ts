@@ -1,6 +1,6 @@
 /* jshint esversion: 6 */
 
-const throttle = (fn, delay = 500) => {
+const throttle = <T extends Function>(fn: T, delay = 500) => {
     let canRun = true;
     return function() {
         if (!canRun) return;
@@ -14,23 +14,23 @@ const throttle = (fn, delay = 500) => {
 
 // 不使用 setTimeout
 
-const throttle_fix = (fn, delay = 500) => {
+const throttle_fix = <T extends Function>(fn: T, delay = 500) => {
     let limited = false;
     let start = Date.now();
-    return function(...args) {
+    return function() {
         let current = Date.now();
         limited = limited && current - start > delay;
         if (!limited) {
-            fn.apply(this, args);
+            fn.apply(this, arguments);
             limited = true;
             start = Date.now();
         }
     };
 };
 
-const mousemouve = throttle_fix(function(e) {
+const mousemouve = throttle_fix((e: MouseEvent) => {
     console.log(this);
     console.log(e.pageX, e.pageY);
 }, 500);
 
-document.querySelector('#id').addEventListener('mousemouve', mousemouve);
+document.querySelector('#id').addEventListener('mousemouve', (e) => {});

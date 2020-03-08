@@ -53,17 +53,6 @@ const limitLoad: LimitLoad = (limit, urls, executor) => {
 
 // ////////////////////////////////////////////
 
-// limitLoad(3, urls, downloadFile)
-//   .then((value: number[]) => {
-//     console.log(value);
-//     console.log('all image loaded');
-//   })
-//   .catch((err: ErrorConstructor) => {
-//     console.error(err);
-//   });
-
-// ////////////////////////////////////////////
-
 interface PromiseValWapper<T> {
     err: ErrorConstructor;
     res: T;
@@ -71,7 +60,7 @@ interface PromiseValWapper<T> {
 
 type PromiseWapper = <T>(promise: Promise<T>) => Promise<PromiseValWapper<T>>;
 
-const promiseWapper: PromiseWapper = <T>(promise: Promise<T>) => {
+export const promiseWapper: PromiseWapper = <T>(promise: Promise<T>) => {
     if (!promise || !Promise.prototype.isPrototypeOf(promise)) {
         return new Promise<PromiseValWapper<T>>((resolve, reject) => {
             reject(new Error('requires promises as the param'));
@@ -90,12 +79,12 @@ const promiseWapper: PromiseWapper = <T>(promise: Promise<T>) => {
 
 // ////////////////////////////////////////////////
 
-(async function() {
-    const { err, res } = await promiseWapper<number[]>(limitLoad(3, urls, downloadFile));
-    if (err) {
-        console.error(err);
-    } else {
-        console.log(res);
-        console.log('all image loaded');
-    }
-})();
+// (async function() {
+//     const { err, res } = await promiseWapper<number[]>(limitLoad(3, urls, downloadFile));
+//     if (err) {
+//         console.error(err);
+//     } else {
+//         console.log(res);
+//         console.log('all image loaded');
+//     }
+// })();

@@ -16,8 +16,6 @@ function start(id) {
     this.promises = !this.promises ? execute(id) : this.promises.then(() => execute(id));
 }
 
-// 测试代码 (请勿更改):
-
 for (let i = 0; i < 5; i++) {
     start(i);
 }

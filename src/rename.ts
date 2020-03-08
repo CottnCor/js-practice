@@ -1,11 +1,8 @@
-#!/usr/bin/env node
-/* jshint esversion: 6 */
+import * as fs from 'fs';
+import * as path from 'path';
+import { argv } from 'optimist';
 
-const fs = require('fs');
-const path = require('path');
-const argv = require('optimist').argv;
-
-function travelSync(dir, callback, finish) {
+function travelSync(dir: string, callback, finish) {
     fs.readdir(dir, function(e, files) {
         if (e === null) {
             (function next(i) {
@@ -41,7 +38,7 @@ function travelSync(dir, callback, finish) {
 
 if (argv.d || argv.dir) {
     let dir = argv.d || argv.dir;
-    travelSync(dir, function(e, fullPath, fileName, next) {
+    travelSync(dir, function(e, fullPath: string, fileName: string, next) {
         if (e !== null) {
             console.log(e);
         }
